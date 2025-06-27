@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Geri Sayım</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #f6d2ff, #c9e4ff);
+      color: #333;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100dvh; /* Mobil uyum için düzeltildi */
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    #countdown {
+      font-size: 2rem;
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 15px 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .message {
+      margin-top: 30px;
+      font-size: 1.3rem;
+      color: #555;
+      max-width: 90%;
+      white-space: pre-line;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      #countdown {
+        font-size: 1.5rem;
+      }
+
+      .message {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Kalbimin yeniden atmasına kalan süre</h1>
+  <div id="countdown">Yükleniyor...</div>
+  <div class="message">
+    Sen olmadıktan sonra neye yararki bu süreler...
+    Ömrüm seninken 3 yıl ne ki?
+    Kalbim bir seni sevdi, seni sevecek
+    Ömrümü iste gene beklerim gene severim
+    Ölüm değilse sevmekten vazgeçiren...
+    O zaman kahrolayım 😊
+  </div>
+
+  <script>
+    function updateCountdown() {
+      const targetDate = new Date("2028-08-12T00:00:00").getTime();
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference <= 0) {
+        document.getElementById("countdown").innerHTML = "Zaman doldu.";
+        return;
+      }
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        `${days} gün ${hours} saat ${minutes} dakika ${seconds} saniye`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
